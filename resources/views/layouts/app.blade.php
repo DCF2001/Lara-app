@@ -74,9 +74,9 @@
                 <div class="col-md-12">
                     <h1 class="mb-4">Welcome, Admin!</h1>
                 </div>
-            </div>
+            </div class ="col-md-9">
 
-            <!-- Other common content can go here -->
+            @yeild('content')
 
         </div>
     </div>
