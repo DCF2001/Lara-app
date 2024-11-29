@@ -16,8 +16,8 @@ use App\Http\Controllers\StudentController;
 
 // Default route to render the main app layout
 Route::get('/', function () {
-    return view('layouts.app'); // Ensure the view path uses a forward slash
+    return view('layout'); // Ensure the view path uses a forward slash
 });
 
 
-Route::resource('students', StudentController::class);
+Route::resource('/students', StudentController::class);
