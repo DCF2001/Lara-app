@@ -12,7 +12,7 @@
 
         .sidebar {
             min-width: 250px;
-            max-width: 250px;
+            max-width: 300px;
             background-color: #343a40;
             color: white;
             transition: all 0.3s;
@@ -56,18 +56,18 @@
 <body>
     <!-- Sidebar -->
     <nav class="sidebar d-flex flex-column">
-        <div class="logo">Welcome Admin !</div>
+        <div class="logo">Student Management</div>
         <button class="btn btn-dark m-2" id="toggleSidebar">☰</button>
         <ul class="nav nav-pills flex-column mb-auto">
             
             <li class="nav-item">
-                <a href="#" class="nav-link">
+            <a href="{{ url('/students') }}" class="nav-link">
                     <i class="bi bi-person"></i>
                     <span>Students</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ url('/teachers') }}" class="nav-link">
                     <i class="bi bi-people"></i>
                     <span>Teachers</span>
                 </a>
@@ -97,6 +97,7 @@
     <!-- Main Content -->
     <div class="content">
         <div class="container">
+        <h1 class="mb-4">Welcome, Admin!</h1>
            @yield('content')
         </div>
     </div>

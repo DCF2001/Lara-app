@@ -43,7 +43,7 @@ class StudentController extends Controller
         Student::create($validated);
 
         // Redirect back to the student list
-        return redirect()->route('students.index')->with('success', 'Student created successfully!');
+        return redirect()->route('students.create')->with('success', 'Student created successfully!');
     }
 
     
@@ -51,8 +51,8 @@ class StudentController extends Controller
      
     public function show(string $id): View
     {
-        $student = Student::findOrFail($id);
-        return view('students.show', compact('student'));
+        $students = Student::findOrFail($id);
+        return view('students.show')->with('students',$students);
     }
 
     
@@ -60,40 +60,23 @@ class StudentController extends Controller
      
     public function edit(string $id): View
     {
-        $student = Student::findOrFail($id);
-        return view('students.edit', compact('student'));
+        $students = Student::findOrFail($id);
+        return view('students.edit')->with('students', $students);
     }
+    
 
     
-      //Update the specified resource in storage.
-     
     public function update(Request $request, string $id): RedirectResponse
     {
-        // Validate the request
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
-            'mobile' => 'required|digits:10',
-        ]);
-
-        // Find and update the student
-        $student = Student::findOrFail($id);
-        $student->update($validated);
-
-        // Redirect back to the student list
-        return redirect()->route('students.index')->with('success', 'Student updated successfully!');
+        $students = Student::find($id);
+        $input = $request->all();
+        $students->update($input);
+        return redirect('students')->with('flash_message', 'student Updated!');  
     }
-
     
-      //Remove the specified resource from storage.
-     
     public function destroy(string $id): RedirectResponse
     {
-        // Find and delete the student
-        $student = Student::findOrFail($id);
-        $student->delete();
-
-        // Redirect back to the student list
-        return redirect()->route('students.index')->with('success', 'Student deleted successfully!');
+        Student::destroy($id);
+        return redirect('students')->with('flash_message', 'Student deleted!'); 
     }
 }
