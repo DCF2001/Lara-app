@@ -15,7 +15,7 @@
 
             <div class="row">
                 <!-- Address Section -->
-                <div class="col-md-4 text-center">
+                <div class="col-md-6 text-center">
                     <div class="p-3 border rounded bg-light">
                         <h5 class="text-muted">Address</h5>
                         <p class="text-dark">{{ $students->address }}</p>
@@ -23,18 +23,22 @@
                 </div>
 
                 <!-- Mobile Section -->
-                <div class="col-md-4 text-center">
+                <div class="col-md-6 text-center">
                     <div class="p-3 border rounded bg-light">
                         <h5 class="text-muted">Mobile</h5>
                         <p class="text-dark">{{ $students->mobile }}</p>
                     </div>
                 </div>
+            </div>
 
-                <!-- Subject Section -->
-                <div class="col-md-4 text-center">
+            <hr class="my-4">
+
+            <!-- Teacher Section -->
+            <div class="row">
+                <div class="col-md-12 text-center">
                     <div class="p-3 border rounded bg-light">
-                        <h5 class="text-muted">Subject</h5>
-                        <p class="text-dark">{{ $students->subject }}</p>
+                        <h5 class="text-muted">Assigned Teacher</h5>
+                        <p class="text-dark">{{ $students->teacher ? $students->teacher->name : 'No teacher assigned' }}</p>
                     </div>
                 </div>
             </div>
@@ -50,7 +54,7 @@
             <form action="{{ url('/students/' . $students->id) }}" method="POST" class="d-inline">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-outline-danger" onclick="return confirm('Are you sure you want to delete this students?');">
+                <button type="submit" class="btn btn-outline-danger" onclick="return confirm('Are you sure you want to delete this student?');">
                     <i class="fa fa-trash"></i> Delete
                 </button>
             </form>

@@ -12,18 +12,12 @@ use Illuminate\Http\RedirectResponse;
 class StudentController extends Controller
 {
     /**
-     * Display a listing of the resource with search functionality.
+     * Display a listing of the resource.
      */
-    public function index(Request $request): View
+    public function index(): View
     {
-        $search = $request->input('search'); // Get the search input from the request
-
-        // Filter students based on the search query or show all students
-        $students = Student::when($search, function ($query, $search) {
-            $query->where('name', 'LIKE', '%' . $search . '%');
-        })->with('teacher')->get();
-
-        return view('students.index', compact('students', 'search'));
+        $students = Student::all();
+        return view("students.index")->with('students', $students);
     }
 
     /**
@@ -78,22 +72,17 @@ class StudentController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id): RedirectResponse
-    {
-        // Validate the request
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
-            'mobile' => 'required|digits:10',
-            'subject' => 'required|string|max:255', // Validate subject field
-        ]);
+{
+    // Validate the request
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'address' => 'required|string|max:255',
+        'mobile' => 'required|digits:10',
+        'subject' => 'required|string|max:255', // Validate subject field
+    ]);
 
-        // Find and update the teacher
-        $teacher = Teacher::findOrFail($id);
-        $teacher->update($validated);
-
-        return redirect()->route('teachers.index')->with('success', 'Teacher updated successfully!');
-    }
-
+    
+}
     /**
      * Remove the specified resource from storage.
      */

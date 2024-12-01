@@ -81,24 +81,7 @@
                     <span>Teachers</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="bi bi-mortarboard"></i>
-                    <span>Enrollment</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="bi bi-calendar-check"></i>
-                    <span>Courses</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="bi bi-journal"></i>
-                    <span>Payments</span>
-                </a>
-            </li>
+           
         </ul>
     </nav>
 

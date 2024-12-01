@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {   
     protected $table = 'students';
-    protected $primaryKey = 'id'; // corrected from 'primarykey' to 'primaryKey'
+    protected $primaryKey = 'id'; 
     
     // Define the fillable fields
     protected $fillable = ['name', 'address', 'mobile', 'teacher_id'];
