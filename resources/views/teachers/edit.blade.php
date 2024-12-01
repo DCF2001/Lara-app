@@ -4,7 +4,7 @@
 <div class="container mt-5">
     <div class="card shadow-lg">
         <div class="card-header bg-primary text-white text-center">
-            <h3 class="mb-0">Update Student Details</h3>
+            <h3 class="mb-0">Update Teacher Details</h3>
         </div>
         <div class="card-body">
             <!-- Success or Error Message -->
@@ -18,12 +18,12 @@
                 </div>
             @endif
 
-            <form action="{{ url('students/' . $students->id) }}" method="POST" class="needs-validation" novalidate>
+            <form action="{{ url('teachers/' . $teacher->id) }}" method="POST" class="needs-validation" novalidate>
                 @csrf
                 @method('PATCH')
 
                 <!-- Hidden Input -->
-                <input type="hidden" name="id" id="id" value="{{ $students->id }}">
+                <input type="hidden" name="id" id="id" value="{{ $teacher->id }}">
 
                 <!-- Name Input -->
                 <div class="form-group mb-4">
@@ -32,11 +32,11 @@
                         type="text" 
                         name="name" 
                         id="name" 
-                        value="{{ $students->name }}" 
+                        value="{{ $teacher->name }}" 
                         class="form-control shadow-sm" 
                         required>
                     <div class="invalid-feedback">
-                        Please enter the student's name.
+                        Please enter the teacher's name.
                     </div>
                 </div>
 
@@ -47,11 +47,11 @@
                         type="text" 
                         name="address" 
                         id="address" 
-                        value="{{ $students->address }}" 
+                        value="{{ $teacher->address }}" 
                         class="form-control shadow-sm" 
                         required>
                     <div class="invalid-feedback">
-                        Please enter the student's address.
+                        Please enter the teacher's address.
                     </div>
                 </div>
 
@@ -62,7 +62,7 @@
                         type="tel" 
                         name="mobile" 
                         id="mobile" 
-                        value="{{ $students->mobile }}" 
+                        value="{{ $teacher->mobile }}" 
                         class="form-control shadow-sm" 
                         pattern="^\d{10}$" 
                         maxlength="10" 
@@ -72,25 +72,19 @@
                         Please enter a valid 10-digit mobile number.
                     </div>
                 </div>
-
-                <!-- Teacher Selection -->
-                <div class="form-group mb-4">
-                    <label for="teacher_id" class="form-label">Assign Teacher</label>
-                    <select 
-                        name="teacher_id" 
-                        id="teacher_id" 
-                        class="form-control shadow-sm" 
-                        required>
-                        <option value="" disabled selected>Select a Teacher</option>
-                        @foreach($teachers as $teacher)
-                            <option value="{{ $teacher->id }}" {{ $students->teacher_id == $teacher->id ? 'selected' : '' }}>
-                                {{ $teacher->name }}
-                            </option>
-                        @endforeach
-                    </select>
+                            <!-- Subject Input -->
+        <div class="form-group mb-4">
+            <label for="subject" class="form-label">Subject</label>
+                <input 
+                          type="text" 
+                          name="subject" 
+                          id="subject" 
+                          value="{{ $teacher->subject }}" 
+                          class="form-control shadow-sm" 
+                          required>
                     <div class="invalid-feedback">
-                        Please select a teacher.
-                    </div>
+                Please enter the subject taught by the teacher.
+                </div>
                 </div>
 
                 <!-- Submit Button -->
@@ -107,7 +101,7 @@
             </form>
         </div>
         <div class="card-footer text-center bg-light">
-            <small class="text-muted">Student Management System &copy; {{ date('Y') }}</small>
+            <small class="text-muted">Teacher Management System &copy; {{ date('Y') }}</small>
         </div>
     </div>
 </div>

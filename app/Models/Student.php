@@ -8,8 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {   
     protected $table = 'students';
-    protected $primarykey = 'id';
-    protected $fillable = ['name','address','mobile'];
+    protected $primaryKey = 'id'; // corrected from 'primarykey' to 'primaryKey'
+    
+    // Define the fillable fields
+    protected $fillable = ['name', 'address', 'mobile', 'teacher_id'];
+
+    // Define the relationship to the Teacher model
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class);
+    }
 
     use HasFactory;
 }

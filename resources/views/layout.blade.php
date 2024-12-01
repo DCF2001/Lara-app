@@ -8,6 +8,7 @@
             display: flex;
             min-height: 100vh;
             overflow-x: hidden;
+            background-color: #f8f9fa;
         }
 
         .sidebar {
@@ -51,6 +52,15 @@
             padding: 15px;
             border-bottom: 1px solid #495057;
         }
+
+        .welcome-message {
+            margin-bottom: 40px;
+            padding: 20px;
+            background: #0d6efd;
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -59,9 +69,8 @@
         <div class="logo">Student Management</div>
         <button class="btn btn-dark m-2" id="toggleSidebar">☰</button>
         <ul class="nav nav-pills flex-column mb-auto">
-            
             <li class="nav-item">
-            <a href="{{ url('/students') }}" class="nav-link">
+                <a href="{{ url('/students') }}" class="nav-link">
                     <i class="bi bi-person"></i>
                     <span>Students</span>
                 </a>
@@ -90,15 +99,20 @@
                     <span>Payments</span>
                 </a>
             </li>
-            
         </ul>
     </nav>
 
     <!-- Main Content -->
     <div class="content">
-        <div class="container">
-        <h1 class="mb-4">Welcome, Admin!</h1>
-           @yield('content')
+        <!-- Welcome Message -->
+        <div class="welcome-message">
+            <h1>Welcome Back, Admin!</h1>
+            <p>Manage your students, teachers, and other details efficiently from the dashboard below.</p>
+        </div>
+
+        <!-- Dynamic Content -->
+        <div class="mt-4">
+            @yield('content')
         </div>
     </div>
 
