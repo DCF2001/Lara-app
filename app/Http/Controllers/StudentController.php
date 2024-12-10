@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\Teacher; // Import Teacher model
@@ -72,23 +71,30 @@ class StudentController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id): RedirectResponse
-{
-    // Validate the request
-    $validated = $request->validate([
-        'name' => 'required|string|max:255',
-        'address' => 'required|string|max:255',
-        'mobile' => 'required|digits:10',
-        'subject' => 'required|string|max:255', // Validate subject field
-    ]);
+    {
+        // Validate the request
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'mobile' => 'required|digits:10',
+            'teacher_id' => 'required|exists:teachers,id', // Validate teacher_id
+        ]);
 
-    
-}
+        // Find the student by ID and update their details
+        $student = Student::findOrFail($id);
+        $student->update($validated);
+
+        // Redirect back with a success message
+        return redirect()->route('students.index')->with('success', 'Student updated successfully!');
+    }
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id): RedirectResponse
     {
         Student::destroy($id);
-        return redirect('students')->with('flash_message', 'Student deleted!');
+        return redirect()->route('students.index')->with('flash_message', 'Student deleted!');
     }
 }
+

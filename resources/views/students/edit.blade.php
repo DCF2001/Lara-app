@@ -21,12 +21,14 @@
                         type="text" 
                         name="name" 
                         id="name" 
-                        value="{{ $students->name }}" 
-                        class="form-control shadow-sm" 
+                        value="{{ old('name', $students->name) }}" 
+                        class="form-control shadow-sm @error('name') is-invalid @enderror" 
                         required>
-                    <div class="invalid-feedback">
-                        Please enter the student's name.
-                    </div>
+                    @error('name')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @else
+                        <div class="invalid-feedback">Please enter the student's name.</div>
+                    @enderror
                 </div>
 
                 <!-- Address Input -->
@@ -36,12 +38,14 @@
                         type="text" 
                         name="address" 
                         id="address" 
-                        value="{{ $students->address }}" 
-                        class="form-control shadow-sm" 
+                        value="{{ old('address', $students->address) }}" 
+                        class="form-control shadow-sm @error('address') is-invalid @enderror" 
                         required>
-                    <div class="invalid-feedback">
-                        Please enter the student's address.
-                    </div>
+                    @error('address')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @else
+                        <div class="invalid-feedback">Please enter the student's address.</div>
+                    @enderror
                 </div>
 
                 <!-- Mobile Input -->
@@ -51,12 +55,37 @@
                         type="text" 
                         name="mobile" 
                         id="mobile" 
-                        value="{{ $students->mobile }}" 
-                        class="form-control shadow-sm" 
+                        value="{{ old('mobile', $students->mobile) }}" 
+                        class="form-control shadow-sm @error('mobile') is-invalid @enderror" 
                         required>
-                    <div class="invalid-feedback">
-                        Please enter a valid mobile number.
-                    </div>
+                    @error('mobile')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @else
+                        <div class="invalid-feedback">Please enter a valid mobile number.</div>
+                    @enderror
+                </div>
+
+                <!-- Teacher Dropdown -->
+                <div class="form-group mb-4">
+                    <label for="teacher_id" class="form-label">Assigned Teacher</label>
+                    <select 
+                        name="teacher_id" 
+                        id="teacher_id" 
+                        class="form-control shadow-sm @error('teacher_id') is-invalid @enderror" 
+                        required>
+                        <option value="" disabled>Select a Teacher</option>
+                        @foreach($teachers as $teacher)
+                            <option value="{{ $teacher->id }}" 
+                                {{ old('teacher_id', $students->teacher_id) == $teacher->id ? 'selected' : '' }}>
+                                {{ $teacher->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('teacher_id')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @else
+                        <div class="invalid-feedback">Please select a teacher.</div>
+                    @enderror
                 </div>
 
                 <!-- Submit Button -->
@@ -75,16 +104,19 @@
 
 <!-- Custom Script for Bootstrap Validation -->
 <script>
-    // Enable Bootstrap Validation
     (function() {
         'use strict';
         window.addEventListener('load', function() {
+            console.log("Bootstrap validation script loaded successfully.");
             var forms = document.getElementsByClassName('needs-validation');
             Array.prototype.filter.call(forms, function(form) {
                 form.addEventListener('submit', function(event) {
                     if (form.checkValidity() === false) {
                         event.preventDefault();
                         event.stopPropagation();
+                        console.log("Form validation failed.");
+                    } else {
+                        console.log("Form submitted successfully.");
                     }
                     form.classList.add('was-validated');
                 }, false);
